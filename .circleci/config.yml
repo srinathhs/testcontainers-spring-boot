@@ -11,6 +11,7 @@ jobs:
       image: circleci/classic:latest
 #     docker_layer_caching: true
 #    working_directory: ~/repo
+    parallelism: 4
 
     environment:
       # Customize the JVM maximum heap limit
@@ -21,6 +22,10 @@ jobs:
           fingerprints:
             - "ae:b8:4a:86:da:b3:7f:35:f5:62:68:61:d6:29:8b:ac"
       - checkout
+      - run:
+          command: |
+            echo $(circleci tests glob "**/*.java")
+            circleci tests glob "**/*.java" | circleci tests split --split-by=timings --timings-type=classname
       - run:
           name: Run build with tests
           no_output_timeout: 30m
