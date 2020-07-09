@@ -37,5 +37,6 @@ public class CassandraProperties extends CommonContainerProperties {
     public String dockerImage = "cassandra:3.11.6";
     public String host = "localhost";
     public int port = 9042;
+    public String networkMode = "bridge";
     public String keyspaceName = "embedded";
 }
