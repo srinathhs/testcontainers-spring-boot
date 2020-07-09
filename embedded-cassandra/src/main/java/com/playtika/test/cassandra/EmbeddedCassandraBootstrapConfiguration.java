@@ -66,6 +66,7 @@ public class EmbeddedCassandraBootstrapConfiguration {
         prepareCassandraInitScript(properties);
 
         GenericContainer cassandra = new CassandraContainer(properties.dockerImage)
+                .withNetworkMode(properties.getNetworkMode());
                 .withInitScript("cassandra-init.sql")
                 .withLogConsumer(containerLogsConsumer(log))
                 .withExposedPorts(properties.getPort());
